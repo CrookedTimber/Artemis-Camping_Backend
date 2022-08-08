@@ -9,8 +9,6 @@ load_dotenv()
 
 
 # Create your views here.
-print("running")
-
 API_KEY = os.environ.get("API_KEY")
 
 # lat = 54.40062359224829
