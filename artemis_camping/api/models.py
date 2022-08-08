@@ -12,7 +12,6 @@ class Trip(models.Model):
     update_date = models.DateField(default=datetime.now)
     create_trip_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='create_trip_user')
     update_trip_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='update_trip_user')
-    user_create = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
 class Budget(models.Model):
     id = models.AutoField(primary_key=True)
@@ -29,6 +28,7 @@ class Checklist(models.Model):
     id = models.AutoField(primary_key=True)
     item = models.TextField(max_length=20)
     remark = models.TextField(max_length=1024)
+    user_in_charge = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='user_in_charge')
     create_date = models.DateField(default=datetime.now)
     update_date = models.DateField(default=datetime.now)
     create_checklist_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='create_checklist_user')
