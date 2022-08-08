@@ -13,6 +13,7 @@ dj-database-url = "*"
 install = "*"
 gunicorn = "*"
 django-heroku = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "34c523717b898c1e0bb894b3e4a44d0d95c48358006c61514c22f01bbd933194"
+            "sha256": "a675904e2ba5dc01da06cf94d05c71aba94c023230ba49a1ad8378999b6408d4"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -71,6 +71,14 @@
             ],
             "index": "pypi",
             "version": "==3.13.1"
+        },
+        "djangorestframework-simplejwt": {
+            "hashes": [
+                "sha256:a60b09afb27d91ad1d7ac904cc632bd52cecead8f389f0fa1532ceb0fb757a74",
+                "sha256:bcc4cb74dcb637ca1e17eed35276bd618ab19491f8c53e65dee6271177c355e8"
+            ],
+            "index": "pypi",
+            "version": "==5.2.0"
         },
         "googlemaps": {
             "hashes": [
@@ -181,6 +189,14 @@
             ],
             "index": "pypi",
             "version": "==2.9.3"
+        },
+        "pyjwt": {
+            "hashes": [
+                "sha256:72d1d253f32dbd4f5c88eaf1fdc62f3a19f676ccbadb9dbc5d07e951b2b26daf",
+                "sha256:d42908208c699b3b973cbeb01a969ba6a96c821eefb1c5bfe4c390c01d67abba"
+            ],
+            "markers": "python_version >= '3.6'",
+            "version": "==2.4.0"
         },
         "python-dotenv": {
             "hashes": [
