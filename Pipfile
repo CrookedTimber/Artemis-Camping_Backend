@@ -10,8 +10,10 @@ googlemaps = "*"
 python-dotenv = "*"
 psycopg2-binary = "*"
 dj-database-url = "*"
-django-heroku = "*"
 gunicorn = "*"
+django-heroku = "*"
+djangorestframework-simplejwt = "*"
+
 
 [dev-packages]
 pytest = "*"
