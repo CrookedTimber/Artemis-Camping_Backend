@@ -8,6 +8,11 @@ django = "*"
 djangorestframework = "*"
 googlemaps = "*"
 python-dotenv = "*"
+psycopg2-binary = "*"
+dj-database-url = "*"
+install = "*"
+gunicorn = "*"
+django-heroku = "*"
 
 [dev-packages]
 
