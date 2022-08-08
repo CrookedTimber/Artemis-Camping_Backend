@@ -1,12 +1,18 @@
 from django.urls import path
 from . import views
+from .api_views import trip, api_test
 
 urlpatterns = [
-    path("", views.home, name="home"),
+    path("", views.home),
     path("view/", views.simple_view, name="view"),
     path("view2/", views.simple_view2, name="vista"),
-
-
+    
+    
+    path('trips-all/', trip.TripList.as_view()),
+    path('trips-create/', trip.TripCreate.as_view()),
+    path("get-places/", api_test.api_test),
+        
+    
     path("login/", views.login_handler, name="login"),
     path("logout/", views.logout_handler, name="logout"),
     path("budget/", views.budget_handler, name="budeget"),

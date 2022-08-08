@@ -1,6 +1,66 @@
 from django.db import models
 from datetime import datetime
-from django.contrib.auth.models import User
+
+# from django.contrib.auth.models import User
+
+from django.conf import settings
+User = settings.AUTH_USER_MODEL
+
+
+# Create your models here.
+
+class TripDetail(models.Model):
+    name = models.CharField(max_length=20)
+    creator = models.ForeignKey(User, on_delete=models.PROTECT)
+    destination_latitude = models.DecimalField(
+        max_digits=20,
+        decimal_places=15,
+        null=False,
+        blank=False,
+    )
+    destination_longitude = models.DecimalField(
+        max_digits=20,
+        decimal_places=15,
+        null=False,
+        blank=False,
+    )
+    start_date = models.DateField()
+    end_date = models.DateField()
+    creation_date = models.DateField(auto_now_add=True)
+    last_update = models.DateField(auto_now_add=True)
+    last_updated_by = models.ForeignKey(
+        User, on_delete=models.PROTECT, null=True, related_name="last_updated_by"
+    )
+    public = models.BooleanField("Public", default=False)
+
+    class Meta:
+
+        ordering = ["-creation_date"]
+        
+        
+class Place(models.Model):
+    name = models.TextField(max_length=1024)
+    place_id = models.CharField(max_length=50)
+    type = models.CharField(max_length=20)
+    latitude = models.DecimalField(
+        max_digits=20,
+        decimal_places=15,
+        null=False,
+        blank=False,
+    )
+    longitude = models.DecimalField(
+        max_digits=20,
+        decimal_places=15,
+        null=False,
+        blank=False,
+    )
+    # trip = models.ForeignKey(Trip, on_delete=models.CASCADE)
+    retrieval_date = models.DateField(auto_now_add=True)
+    
+    class Meta:
+
+        ordering = ["-retrieval_date"]
+        
 
 # Create your models here.
 

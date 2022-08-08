@@ -5,8 +5,21 @@ name = "pypi"
 
 [packages]
 django = "*"
+djangorestframework = "*"
+googlemaps = "*"
+python-dotenv = "*"
+psycopg2-binary = "*"
+dj-database-url = "*"
+gunicorn = "*"
+django-heroku = "*"
+djangorestframework-simplejwt = "*"
+
 
 [dev-packages]
+pytest = "*"
 
 [requires]
 python_version = "3.10"
+
+[scripts]
+server = "python manage.py runserver"

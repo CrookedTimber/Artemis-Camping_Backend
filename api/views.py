@@ -1,11 +1,11 @@
-from django.shortcuts import render
+# from django.shortcuts import render
 from django.http import HttpResponse
 from api.implementations.bad_request import *
 from api.implementations.budget import *
 from api.implementations.checklist import *
 from api.implementations.duration import *
 from api.implementations.home import *
-from api.implementations.itinerary import *
+from api.implementations.itinerary  import *
 from api.implementations.landing import *
 from api.implementations.login import *
 from api.implementations.logout import *
