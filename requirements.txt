@@ -9,7 +9,6 @@ djangorestframework==3.13.1
 googlemaps==4.6.0
 gunicorn==20.1.0
 idna==3.3; python_version >= '3.5'
-install==1.3.5
 psycopg2==2.9.3; python_version >= '3.6'
 psycopg2-binary==2.9.3
 python-dotenv==0.20.0
