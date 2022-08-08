@@ -1,11 +1,12 @@
 import googlemaps
 from dotenv import load_dotenv
+from ..models import Place
+
 
 import os
 
 load_dotenv()
 
-from ..models import Place
 
 # Create your views here.
 print("running")
