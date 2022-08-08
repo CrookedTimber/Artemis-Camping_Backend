@@ -82,7 +82,7 @@ def api_test(request):
         for place in place_type["results"]:  
             for type in place["types"]:
                 if type not in listed_types:
-                    Place.objects.create(name=place["name"], type=categories_string_list[counter], latitude=place["geometry"]["location"]["lat"], longitude=place["geometry"]["location"]["lng"])
+                    Place.objects.create(name=place["name"], type=categories_string_list[counter], latitude=place["geometry"]["location"]["lat"], longitude=place["geometry"]["location"]["lng"], place_id=place["id"])
         listed_types.append(categories_string_list[counter])
         counter += 1
     
