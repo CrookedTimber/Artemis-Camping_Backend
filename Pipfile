@@ -15,6 +15,7 @@ django-heroku = "*"
 djangorestframework-simplejwt = "*"
 install = "*"
 psycopg2 = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 pytest = "*"
