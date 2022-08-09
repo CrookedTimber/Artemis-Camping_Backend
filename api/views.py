@@ -146,13 +146,13 @@ def settings_handler(request):
     return bad_request()
 
 #@login_required
-def forecast_handler(request):
+def forecast_handler(request, parameters):
     if request.method == 'GET':
-        return forecast_get_handler(request)
+        return forecast_get_handler(request, parameters)
     return bad_request()
 
 #@login_required
-def weather_handler(request):
+def weather_handler(request, parameters):
     if request.method == 'GET':
-        return weather_get_handler(request)
+        return weather_get_handler(request, parameters)
     return bad_request()
