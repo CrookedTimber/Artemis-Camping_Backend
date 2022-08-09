@@ -25,5 +25,6 @@ urlpatterns = [
     path("map/", views.map_handler, name="map"),
     path("messaging/", views.messaging_handler, name="messaging"),
     path("settings/", views.settings_handler, name="settings"),
+    path("forecast/", views.forecast_handler, name="forecast"),
     path("weather/", views.weather_handler, name="weather"),
 ]
