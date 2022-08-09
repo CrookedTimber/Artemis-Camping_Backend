@@ -13,7 +13,8 @@ dj-database-url = "*"
 gunicorn = "*"
 django-heroku = "*"
 djangorestframework-simplejwt = "*"
-
+install = "*"
+psycopg2 = "*"
 
 [dev-packages]
 pytest = "*"
