@@ -1,70 +1,81 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from django.core import serializers
+from django.shortcuts import get_list_or_404
+from ..models import Member, Trip
+from users.models import UserAccount
+import json
 
-def member_get_handler(request):
-    return JsonResponse(
-        {'status':'OK',
-        'message':'',
-        'member': [{
-            'id':1,
-            'user_id':1,
-            'user_name':'Wing',
-            'create_date':'2022-08-08',
-            'update_date':'2022-08-08',
-            'create_user':'Edgar',
-            'update_user':'Edgar'
-            },
-            {
-            'id':2,
-            'user_id':2,
-            'user_name':'Edgar',
-            'create_date':'2022-08-08',
-            'update_date':'2022-08-08',
-            'create_user':'Edgar',
-            'update_user':'Edgar'
-            },
-            {
-            'id':3,
-            'user_id':3,
-            'user_name':'Sam',
-            'create_date':'2022-08-08',
-            'update_date':'2022-08-08',
-            'create_user':'Edgar',
-            'update_user':'Edgar'
-            },
-            {
-            'id':4,
-            'user_id':4,
-            'user_name':'Nathan',
-            'create_date':'2022-08-08',
-            'update_date':'2022-08-08',
-            'create_user':'Edgar',
-            'update_user':'Edgar'
-            },
-            {
-            'id':5,
-            'user_id':5,
-            'user_name':'Summira',
-            'create_date':'2022-08-08',
-            'update_date':'2022-08-08',
-            'create_user':'Edgar',
-            'update_user':'Edgar'
-            }]
-        })
 
-def member_post_handler(request):
-    return JsonResponse(
-        {'status':'OK',
-        'message':''
-        })
+def get_trip_members(request, trip_id):
+    members = get_list_or_404(Member, trip=trip_id)
+    members_json = serializers.serialize("json", members)
+    return HttpResponse(members_json, content_type="application/json")
+
+
+def member_post_handler(request, trip_id):
+
+    data = json.loads(request.body)
+
+    if Member.objects.filter(trip=trip_id, member=data["user_id"]).exists():
+        return JsonResponse(
+            {
+                "status": "403",
+                "message": f"User already in trip {trip_id}",
+            },
+            status=403,
+        )
+    else:
+        trip = Trip.objects.get(id=trip_id)
+        user = UserAccount.objects.get(id=data["user_id"])
+
+        """Change user for request.user"""
+        new_member = Member(
+            name=user.email,
+            member=user,
+            trip=trip,
+            create_member_user=user,
+            update_member_user=user,
+        )
+
+        new_member.save()
+
+        return JsonResponse(
+            {
+                "status": "201",
+                "message": f"{user.email} succesfully joined trip {trip_id}",
+            },
+            201,
+        )
+
 
 def member_put_handler(request):
-    return JsonResponse(
-        {'status':'OK',
-        'message':''
-        })
+    return JsonResponse({"status": "OK", "message": ""})
 
-def member_delete_handler(request):
-    return JsonResponse(
-        {'status':'OK',
-        'message':''
-        })
+
+def member_delete_handler(request, trip_id):
+
+    data = json.loads(request.body)
+    # data = request.POST
+    print(data["user_id"])
+
+    if Member.objects.filter(trip=trip_id, member=data["user_id"]).exists():
+        member_to_delete = Member.objects.get(trip=trip_id, member=data["user_id"])
+
+        member_name = member_to_delete.name
+        member_to_delete.delete()
+
+        return JsonResponse(
+            {
+                "status": "204",
+                "message": f"Member     {member_name} successfully     deleted from trip number     {trip_id}",
+            },
+            status=204,
+        )
+    else:
+        return JsonResponse(
+            {
+                "status": "404",
+                "message": f"Member not in trip number",
+            },
+            status=404,
+        )
