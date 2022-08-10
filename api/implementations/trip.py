@@ -3,7 +3,7 @@ from django.http import JsonResponse, HttpResponse
 from django.core import serializers
 from django.shortcuts import get_list_or_404
 from datetime import datetime
-from ..view_helpers.placesAPI import get_trip_places
+from ..outgoing_api.placesAPI import get_trip_places
 from ..models import Trip, Member
 
 
