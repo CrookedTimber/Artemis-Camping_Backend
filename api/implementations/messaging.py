@@ -18,8 +18,8 @@ def messaging_post_handler(request, trip_id):
     data = json.loads(request.body)
 
     """Deploy: request.user / Test: user id=1"""
-    # user = UserAccount.objects.get(id=1)
-    user = request.user
+    user = UserAccount.objects.get(id=1)
+    # user = request.user
 
     if not Member.objects.filter(trip=trip_id, member=user.pk).exists():
         return JsonResponse(
@@ -36,8 +36,8 @@ def messaging_post_handler(request, trip_id):
         new_message = Message(
             name=user.username,
             message_body=data["message"],
-            # create_message_user=user,
-            create_message_user=request.user,
+         
+            create_message_user=user,
             trip=trip,
         )
         new_message.save()
