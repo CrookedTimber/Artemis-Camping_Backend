@@ -7,8 +7,6 @@ from ..outgoing_api.placesAPI import get_trip_places
 from ..models import Trip, Member
 from users.models import UserAccount
 import json
-from datetime import datetime
-
 
 def trip_get_handler(request):
     
@@ -52,7 +50,6 @@ def trip_post_handler(request):
     new_member.save()
 
     """Places API call. No longer needed"""
-
     # get_trip_places(new_trip, float(data["latitude"]), float(data["longitude"]))
 
     return JsonResponse(
@@ -110,12 +107,13 @@ def single_trip_put(request, trip_id):
                 trip_to_update.destination = data["destination"]
             if "start_date" in data:
                 start_date = datetime.strptime(data["start_date"], "%Y-%m-%d")
-                trip_to_update.start_date = (start_date,)
+                trip_to_update.start_date = (start_date)
             if "end_date" in data:
                 end_date = datetime.strptime(data["end_date"], "%Y-%m-%d")
-                trip_to_update.end_date = (end_date,)
+                trip_to_update.end_date = (end_date)
 
             trip_to_update.last_updated_by = user
+            trip_to_update.last_update = datetime.now()
 
             trip_to_update.save()
 
