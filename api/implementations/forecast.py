@@ -1,6 +1,6 @@
 from api.outgoing_api.weather_api import *
 
-def weather_get_handler(request, parameters):
+def forecast_get_handler(request, parameters):
     array = parameters.split('&')
-    json = get_weather('weather', array)
+    json = get_weather('forecast', array)
     return JsonResponse(json)

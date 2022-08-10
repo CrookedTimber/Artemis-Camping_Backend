@@ -46,5 +46,6 @@ urlpatterns = [
     path("itinerary/", views.itinerary_handler, name="itinerary"),
     path("landing/", views.landing_handler, name="landing"),
     path("settings/", views.settings_handler, name="settings"),
-    path("weather/", views.weather_handler, name="weather"),
+    path("forecast/<parameters>", views.forecast_handler, name="forecast"),
+    path("weather/<parameters>", views.weather_handler, name="weather"),
 ]

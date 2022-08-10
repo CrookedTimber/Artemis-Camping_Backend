@@ -4,6 +4,9 @@ from django.http import HttpResponse
 from api.implementations.bad_request import *
 from api.implementations.budget import *
 from api.implementations.checklist import *
+
+from api.implementations.duration import *
+from api.implementations.forecast import *
 from api.implementations.home import *
 from api.implementations.itinerary  import *
 from api.implementations.landing import *
@@ -144,9 +147,15 @@ def settings_handler(request):
     return bad_request()
 
 #@login_required
-def weather_handler(request):
+def forecast_handler(request, parameters):
     if request.method == 'GET':
-        return weather_get_handler(request)
+        return forecast_get_handler(request, parameters)
     return bad_request()
 
+
+#@login_required
+def weather_handler(request, parameters):
+    if request.method == 'GET':
+        return weather_get_handler(request, parameters)
+    return bad_request()
 
