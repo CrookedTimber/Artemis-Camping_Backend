@@ -2,21 +2,29 @@ import googlemaps
 from dotenv import load_dotenv
 from ..models import Place
 
-
 import os
+
+
 
 load_dotenv()
 
+API_KEY = os.environ.get("API_KEY")
+gmaps = googlemaps.Client(key=API_KEY)
+   
+
+
 
 # Create your views here.
-API_KEY = os.environ.get("API_KEY")
 
 # lat = 54.40062359224829
 # lon = -1.734956949889292
-gmaps = googlemaps.Client(key=API_KEY)
 
 
-def get_trip_places(trip, lat, lon):
+
+def get_trip_places(trip_id, lat, lon):
+    print(lat)
+    
+ 
     """_summary_
     Gathers data of several types of places near a trip destination point and stores them into the database.
 
@@ -29,6 +37,7 @@ def get_trip_places(trip, lat, lon):
     campground = gmaps.places_nearby(
         location=f"{lat},{lon}", radius=1500, type="campground"
     )
+    
 
     rv_park = gmaps.places_nearby(location=f"{lat},{lon}", radius=1500, type="rv_park")
 
@@ -95,23 +104,29 @@ def get_trip_places(trip, lat, lon):
 
     categories_filters = []
     counter = 0
+    
 
     for place_type in places_categories_list:
+        print("RUNNING")
+        print(place_type)
 
         for place in place_type["results"]:
+            
 
             for type in place["types"]:
 
                 if type not in categories_filters:
 
-                    Place.objects.create(
+                    new_place = Place(
                         name=place["name"],
                         type=categories_string_list[counter],
                         latitude=place["geometry"]["location"]["lat"],
                         longitude=place["geometry"]["location"]["lng"],
-                        place_id=place["place_id"],
-                        trip=trip,
-                    )
+                        gmaps_id=place["place_id"],
+                        
+                        # place_id=place["place_id"],
+                        trip=trip_id)
+                    new_place.save()
 
         categories_filters.append(categories_string_list[counter])
         counter += 1
