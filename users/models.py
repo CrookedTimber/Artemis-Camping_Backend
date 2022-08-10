@@ -3,7 +3,7 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, Permis
 
 
 class UserAccountManager(BaseUserManager):
-  def create_user(self, first_name, last_name, email, password=None):
+  def create_user(self, first_name, last_name, email, username, password=None):
     if not email:
       raise ValueError('Users must have an email address')
 
@@ -13,6 +13,7 @@ class UserAccountManager(BaseUserManager):
     user = self.model(
       first_name=first_name,
       last_name=last_name,
+      username=username,
       email=email,
     )
 
@@ -21,11 +22,12 @@ class UserAccountManager(BaseUserManager):
 
     return user
   
-  def create_superuser(self, first_name, last_name, email, password=None):
+  def create_superuser(self, first_name, last_name, email, username, password=None):
     user = self.create_user(
       first_name,
       last_name,
       email,
+      username,
       password=password,
     )
 
@@ -40,13 +42,14 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
   first_name = models.CharField(max_length=255)
   last_name = models.CharField(max_length=255)
   email = models.EmailField(unique=True, max_length=255)
+  username = models.CharField(unique=True, max_length=255)
   is_active = models.BooleanField(default=True)
   is_staff = models.BooleanField(default=False)
 
   objects = UserAccountManager()
 
-  USERNAME_FIELD = 'email'
-  REQUIRED_FIELDS = ['first_name', 'last_name']
+  USERNAME_FIELD = 'username'
+  REQUIRED_FIELDS = ['first_name', 'last_name', 'email']
 
   def __str__(self):
     return self.email
