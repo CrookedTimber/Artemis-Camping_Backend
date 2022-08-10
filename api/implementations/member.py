@@ -30,11 +30,11 @@ def member_post_handler(request, trip_id):
 
         """Change user for request.user"""
         new_member = Member(
-            name=user.email,
-            member=user,
+            name=user.username,
+            member=request.user,
             trip=trip,
-            create_member_user=user,
-            update_member_user=user,
+            create_member_user=request.user.username,
+            update_member_user=request.user.username,
         )
 
         new_member.save()
@@ -42,14 +42,106 @@ def member_post_handler(request, trip_id):
         return JsonResponse(
             {
                 "status": "201",
-                "message": f"{user.email} succesfully joined trip {trip_id}",
+                "message": f"{user.username} succesfully joined trip {trip_id}",
             },
             201,
         )
 
+# Not needed for the app
+def member_put_handler(request, trip_id):
 
-def member_put_handler(request):
-    return JsonResponse({"status": "OK", "message": ""})
+    user = request.user
+    # user = UserAccount.objects.get(id=1)
+    data = json.loads(request.body)
+    
+
+
+    if Trip.objects.filter(pk=trip_id).exists():
+        
+        
+        if Member.objects.filter(member=data["user_id"]).exists():
+            
+        
+            if Member.objects.filter(member=user.id).exists(): 
+                             
+            
+                member_to_update = Member.objects.get(pk=data["user_id"])
+    
+                if "name" in data:
+                    member_to_update.name = data["name"]
+    
+                    member_to_update.last_updated_by = user
+     
+                    member_to_update.save()
+    
+                    return JsonResponse(
+                        {
+                            "status": "204",
+                            "message": f"Trip member {member_to_update.name} successfully updated",
+                        },
+                        status=204,
+                    )
+                else:
+                    return JsonResponse(
+                        {
+                            "status": "100",
+                            "message": f"No update: Request does not contain new values for existing datafields",
+                        },
+                        status=100,
+                    )
+                    
+                    
+                
+                
+            else:
+                return JsonResponse(
+                {
+                    "status": "403",
+                    "message": f"You are not a member of this trip",
+                },
+                status=403,
+            )
+                
+                
+        else:
+            
+            return JsonResponse(
+                {
+                    "status": "404",
+                    "message": f"User is not a member of this trip",
+                },
+                status=404,
+            )
+
+    else:
+        return JsonResponse(
+                {
+                    "status": "403",
+                    "message": f"You're not the manager of this trip!",
+                },
+                status=403,
+            )
+
+    return JsonResponse(
+        {
+            "status": "404",
+            "message": f"This trip doesn't exists",
+        },
+        status=404,
+    )
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def member_delete_handler(request, trip_id):
@@ -67,7 +159,7 @@ def member_delete_handler(request, trip_id):
         return JsonResponse(
             {
                 "status": "204",
-                "message": f"Member     {member_name} successfully     deleted from trip number     {trip_id}",
+                "message": f"Member  {member_name} successfully  deleted from trip number {trip_id}",
             },
             status=204,
         )

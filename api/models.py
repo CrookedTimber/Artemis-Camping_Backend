@@ -12,18 +12,8 @@ class Trip(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=20)
     creator = models.ForeignKey(User, on_delete=models.PROTECT)
-    destination_latitude = models.DecimalField(
-        max_digits=20,
-        decimal_places=15,
-        null=False,
-        blank=False,
-    )
-    destination_longitude = models.DecimalField(
-        max_digits=20,
-        decimal_places=15,
-        null=False,
-        blank=False,
-    )
+    origin = models.CharField(max_length=300)
+    destination = models.CharField(max_length=300)
     start_date = models.DateField(default=datetime.now)
     end_date = models.DateField(default=datetime.now)
     creation_date = models.DateField(default=datetime.now)

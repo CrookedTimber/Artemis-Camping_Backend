@@ -89,7 +89,7 @@ def single_trip_handler(request, trip_id):
     if request.method == 'GET':
         return single_trip_get(request, trip_id)
     elif request.method == 'PUT':
-        return trip_put_handler(request, trip_id)
+        return single_trip_put(request, trip_id)
     elif request.method == 'DELETE':
         return single_trip_delete(request, trip_id)
     return bad_request()
@@ -101,7 +101,7 @@ def home_handler(request):
         return home_get_handler(request)
     return bad_request()
 
-#@login_required
+# @login_required
 def itinerary_handler(request):
     if request.method == 'GET':
         return itinerary_get_handler(request)
@@ -123,6 +123,9 @@ def trip_members_handler(request, trip_id):
         return member_post_handler(request, trip_id)
     elif request.method == 'DELETE':
         return member_delete_handler(request, trip_id)
+    elif request.method == 'PUT':
+        return member_put_handler(request, trip_id)
+    
     
     return bad_request()
         

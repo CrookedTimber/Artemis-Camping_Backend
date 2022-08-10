@@ -20,10 +20,7 @@ load_dotenv()
 
 
 # Create your views here.
-DATABASE_NAME = os.environ.get("DATABASE_NAME")
-DATABASE_USER = os.environ.get("DATABASE_USER")
-DATABASE_PASSWORD = os.environ.get("DATABASE_PASSWORD")
-DATABASE_HOST = os.environ.get("DATABASE_HOST")
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -94,16 +91,21 @@ WSGI_APPLICATION = "artemis_camping.wsgi.application"
 
 DATABASES = {
     "default": {
-        # "ENGINE": "django.db.backends.sqlite3",
-        # "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+        
+        # "DATABASE_URL": "postgres://rguedfavemmmua:06d16fe40c02970b81c1d911ba80e50d46b2d639132a4d939a1ad175331f3f8f@ec2-54-155-110-181.eu-west-1.compute.amazonaws.com:5432/d3f78p0fnoqj91",
+        
+        
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": DATABASE_NAME,
-        "USER": DATABASE_USER,
-        "PASSWORD": DATABASE_PASSWORD,
-        "HOST": DATABASE_HOST,
+        "NAME": os.environ.get("DATABASE_NAME"),
+        "USER": os.environ.get("DATABASE_USER"),
+        "PASSWORD": os.environ.get("DATABASE_PASSWORD"),
+        "HOST": os.environ.get("DATABASE_HOST"),
         "PORT": 5432,
     }
 }
+
 
 
 # Password validation
