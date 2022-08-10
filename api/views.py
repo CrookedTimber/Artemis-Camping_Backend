@@ -5,7 +5,7 @@ from api.implementations.bad_request import *
 from api.implementations.budget import *
 from api.implementations.checklist import *
 
-from api.implementations.duration import *
+
 from api.implementations.forecast import *
 from api.implementations.home import *
 from api.implementations.itinerary  import *
