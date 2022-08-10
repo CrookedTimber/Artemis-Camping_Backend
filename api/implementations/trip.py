@@ -7,7 +7,7 @@ from ..outgoing_api.placesAPI import get_trip_places
 from ..models import Trip, Member
 from users.models import UserAccount
 import json
-import datetime
+from datetime import datetime
 
 
 def trip_get_handler(request):
