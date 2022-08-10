@@ -18,8 +18,8 @@ def checklist_post_handler(request, trip_id):
     data = json.loads(request.body)
 
     """Delete user and use request.user"""
-    # user = UserAccount.objects.get(id=1)
-    user = request.user
+    user = UserAccount.objects.get(id=1)
+    # user = request.user
 
   
 
@@ -76,4 +76,3 @@ def checklist_delete_handler(request, trip_id):
             {"status": "404", "message": "Checklist item does not exists"}, status=404
         )
 
-    return JsonResponse({"status": "OK", "message": ""})

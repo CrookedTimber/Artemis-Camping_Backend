@@ -15,6 +15,7 @@ def get_trip_members(request, trip_id):
 def member_post_handler(request, trip_id):
 
     data = json.loads(request.body)
+    user = UserAccount.objects.get(id=1)
 
     if Member.objects.filter(trip=trip_id, member=data["user_id"]).exists():
         return JsonResponse(
@@ -26,15 +27,15 @@ def member_post_handler(request, trip_id):
         )
     else:
         trip = Trip.objects.get(id=trip_id)
-        user = UserAccount.objects.get(id=data["user_id"])
+        new_member = UserAccount.objects.get(id=data["user_id"])
 
         """Change user for request.user"""
         new_member = Member(
             name=user.username,
-            member=request.user,
+            member=new_member,
             trip=trip,
-            create_member_user=request.user.username,
-            update_member_user=request.user.username,
+            create_member_user=user,
+            update_member_user=user,
         )
 
         new_member.save()
@@ -50,8 +51,8 @@ def member_post_handler(request, trip_id):
 # Not needed for the app
 def member_put_handler(request, trip_id):
 
-    user = request.user
-    # user = UserAccount.objects.get(id=1)
+    # user = request.user
+    user = UserAccount.objects.get(id=1)
     data = json.loads(request.body)
     
 

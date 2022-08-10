@@ -19,8 +19,8 @@ def trip_get_handler(request):
 
 def trip_post_handler(request):
 
-    user = request.user
-    # user = UserAccount.objects.get(id=1)
+    # user = request.user
+    user = UserAccount.objects.get(id=1)
 
     """Deploy: json.loads... / Test: request.POST"""
     data = json.loads(request.body)
@@ -92,8 +92,8 @@ def single_trip_delete(request, trip_id):
 
 def single_trip_put(request, trip_id):
 
-    user = request.user
-    # user = UserAccount.objects.get(id=1)
+    # user = request.user
+    user = UserAccount.objects.get(id=1)
     data = json.loads(request.body)
 
     if Trip.objects.filter(pk=trip_id).exists():
