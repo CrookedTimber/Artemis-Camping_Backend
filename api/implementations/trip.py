@@ -34,7 +34,7 @@ def trip_post_handler(request):
         name=data["name"],
         creator=user,
         origin=data["origin"],
-        destination=data["longitude"],
+        destination=data["destination"],
         start_date=start_date,
         end_date=end_date,
         last_updated_by=user,
