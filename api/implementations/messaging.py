@@ -34,7 +34,7 @@ def messaging_post_handler(request, trip_id):
 
         """Deploy: request.user / Test: user id=1"""
         new_message = Message(
-            name=user.email,
+            name=user.username,
             message_body=data["message"],
             # create_message_user=user,
             create_message_user=request.user,
