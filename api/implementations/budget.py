@@ -16,7 +16,8 @@ def budget_post_handler(request, trip_id):
     data = json.loads(request.body)
 
     """Delete user and use request.user"""
-    user = UserAccount.objects.get(id=1)
+    # user = UserAccount.objects.get(id=1)
+    user = request.user
 
     if not Member.objects.filter(trip=trip_id, member=user.pk).exists():
         return JsonResponse(

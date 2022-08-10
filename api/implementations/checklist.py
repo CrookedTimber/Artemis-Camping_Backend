@@ -36,7 +36,7 @@ def checklist_post_handler(request, trip_id):
 
         """Change user for request.user"""
         new_checklist = Checklist(
-            # name=user.email,
+            name=user.username,
             item=data["item"],
             remark=data["remark"],
             user_in_charge=user,
