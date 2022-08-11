@@ -21,7 +21,7 @@ def member_post_handler(request, trip_id):
     data = json.loads(request.body)
     user = UserAccount.objects.get(id=1)
 
-    if Member.objects.filter(trip=trip_id, member=data["user_id"]).exists():
+    if Member.objects.filter(trip=trip_id).filter(member=data["user_id"]).exists():
         return JsonResponse(
             {
                 "status": "403",
@@ -155,7 +155,7 @@ def member_delete_handler(request, trip_id):
     # data = request.POST
     print(data["user_id"])
 
-    if Member.objects.filter(trip=trip_id, member=data["user_id"]).exists():
+    if Member.objects.filter(trip=trip_id).filter(member=data["user_id"]).exists():
         member_to_delete = Member.objects.get(trip=trip_id, member=data["user_id"])
 
         member_name = member_to_delete.name
