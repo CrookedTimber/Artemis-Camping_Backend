@@ -78,10 +78,6 @@ def trip_handler(request):
         return trip_get_handler(request)
     elif request.method == 'POST':
         return trip_post_handler(request)
-    # elif request.method == 'PUT':
-    #     return trip_put_handler(request)
-    # elif request.method == 'DELETE':
-    #     return trip_delete_handler(request)
     return bad_request()
 
 @csrf_exempt
