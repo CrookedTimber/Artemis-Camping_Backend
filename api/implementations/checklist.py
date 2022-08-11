@@ -33,12 +33,15 @@ def checklist_post_handler(request, trip_id):
         )
     else:
         trip = Trip.objects.get(id=trip_id)
+        
+        user_in_charge = UserAccount.objects.get(id=data["person_in_charge"])
 
         """Change user for request.user"""
         new_checklist = Checklist(
             item=data["item"],
             remark=data["remark"],
-            user_in_charge=UserAccount.objects.get(id=data["person_in_charge"]),
+            user_in_charge = user_in_charge,
+            name = user_in_charge.username,
             create_checklist_user=user,
             update_checklist_user=user,
             trip=trip,
