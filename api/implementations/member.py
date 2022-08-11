@@ -6,7 +6,7 @@ from users.models import UserAccount
 import json
 
 def get_all_member_handler(request):
-    members = Member.objects.filter(trip=trip_id)
+    members = Member.objects.all()
     members_json = serializers.serialize("json", members)
     return HttpResponse(members_json, content_type="application/json")
 
