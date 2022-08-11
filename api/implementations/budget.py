@@ -10,8 +10,7 @@ import json
 
 def budget_get_handler(request, trip_id):
     
-    
-    budget = get_list_or_404(Budget, trip=trip_id)
+    budget = Budget.objects.filter(trip=trip_id)
     budget_json = serializers.serialize("json", budget)
     return HttpResponse(budget_json, content_type="application/json")
 
@@ -78,10 +77,10 @@ def budget_put_handler(request, trip_id):
 
                 return JsonResponse(
                     {
-                        "status": "204",
+                        "status": "201",
                         "message": f"Budget item successfully updated",
                     },
-                    status=204,
+                    status=201,
                 )
 
             else:
