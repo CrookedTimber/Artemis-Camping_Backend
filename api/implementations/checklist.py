@@ -38,7 +38,7 @@ def checklist_post_handler(request, trip_id):
         new_checklist = Checklist(
             item=data["item"],
             remark=data["remark"],
-            user_in_charge=user,
+            user_in_charge=UserAccount.objects.get(id=data["person_in_charge"]),
             create_checklist_user=user,
             update_checklist_user=user,
             trip=trip,
