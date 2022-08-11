@@ -5,8 +5,8 @@ from ..models import Member, Trip
 from users.models import UserAccount
 import json
 
-def get_all_member_handler(request):
-    members = Member.objects.all()
+def get_all_user_handler(request):
+    members = UserAccount.objects.all()
     members_json = serializers.serialize("json", members)
     return HttpResponse(members_json, content_type="application/json")
 
