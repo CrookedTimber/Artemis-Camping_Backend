@@ -43,7 +43,7 @@ urlpatterns = [
     
     path("trip/<int:trip_id>/budget/", views.budget_handler, name="trip_budget"),
 
-    path("member/all/", views.all_member_handler, name="all_member"),
+    path("user/all/", views.all_user_handler, name="all_user"),
 
     path("home/", views.home_handler, name="home"),
     path("itinerary/", views.itinerary_handler, name="itinerary"),

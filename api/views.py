@@ -121,9 +121,9 @@ def trip_members_handler(request, trip_id):
     return bad_request()
 
 @csrf_exempt
-def all_member_handler(request):
+def all_user_handler(request):
     if request.method == 'GET':
-        return get_all_member_handler(request)
+        return get_all_user_handler(request)
     return bad_request() 
 
 @csrf_exempt
