@@ -35,7 +35,7 @@ def member_post_handler(request, trip_id):
 
         """Change user for request.user"""
         new_member = Member(
-            name=user.username,
+            name=new_member.username,
             member=new_member,
             trip=trip,
             create_member_user=user,
