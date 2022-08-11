@@ -6,7 +6,7 @@ from users.models import UserAccount
 import json
 
 def get_all_member_handler(request):
-    members = get_list_or_404(Member)
+    members = Member.objects.filter(trip=trip_id)
     members_json = serializers.serialize("json", members)
     return HttpResponse(members_json, content_type="application/json")
 
@@ -67,7 +67,7 @@ def member_put_handler(request, trip_id):
 
             if Member.objects.filter(member=user.id).exists():
 
-                member_to_update = Member.objects.get(pk=data["user_id"])
+                member_to_update = Member.objects.get(member=data["user_id"])
 
                 if "name" in data:
                     member_to_update.name = data["name"]
@@ -81,7 +81,7 @@ def member_put_handler(request, trip_id):
                             "status": "204",
                             "message": f"Trip member {member_to_update.name} successfully updated",
                         },
-                        status=204,
+                        status=201,
                     )
                 else:
                     return JsonResponse(
@@ -136,7 +136,7 @@ def member_delete_handler(request, trip_id):
         return JsonResponse(
             {
                 "status": "204",
-                "message": f"Member  {member_name} successfully  deleted from trip number {trip_id}",
+                "message": f"Member {member_name} successfully  deleted from trip number {trip_id}",
             },
             status=204,
         )
