@@ -80,15 +80,26 @@ def single_trip_delete(request, trip_id):
 
     trip_to_delete = get_list_or_404(Trip, id=trip_id)
     # trip_to_delete = Trip.objects.get(id=trip_id)
-    trip_to_delete.delete()
 
-    return JsonResponse(
-        {
-            "status": "204",
-            "message": f"Trip number {trip_id} successfully deleted",
-        },
-        status=204,
-    )
+    try:
+        trip_to_delete[0].delete()
+        return JsonResponse(
+            {
+                "status": "204",
+                "message": f"Trip number {trip_id} successfully deleted",
+            },
+            status=204,
+        )
+    except:
+        return JsonResponse(
+            {
+                "status": "404",
+                "message": f"This trip doesn't exists",
+            },
+            status=404,
+        )
+
+    
 
 def single_trip_put(request, trip_id):
 
