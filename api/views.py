@@ -121,10 +121,13 @@ def trip_members_handler(request, trip_id):
         return member_delete_handler(request, trip_id)
     elif request.method == 'PUT':
         return member_put_handler(request, trip_id)
-    
-    
     return bad_request()
-        
+
+@csrf_exempt
+def all_member_handler(request):
+    if request.method == 'GET':
+        return get_all_member_handler(request)
+    return bad_request() 
 
 @csrf_exempt
 def messaging_handler(request, trip_id):
