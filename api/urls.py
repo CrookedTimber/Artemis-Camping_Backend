@@ -42,6 +42,9 @@ urlpatterns = [
     # DELETE: Deletes a budget item from the trip. Body: {"item_id": 3}
     
     path("trip/<int:trip_id>/budget/", views.budget_handler, name="trip_budget"),
+
+    path("member/all/", views.all_member_handler, name="all_member"),
+
     path("home/", views.home_handler, name="home"),
     path("itinerary/", views.itinerary_handler, name="itinerary"),
     path("landing/", views.landing_handler, name="landing"),

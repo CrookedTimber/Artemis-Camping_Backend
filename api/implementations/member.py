@@ -5,6 +5,10 @@ from ..models import Member, Trip
 from users.models import UserAccount
 import json
 
+def get_all_member_handler(request):
+    members = get_list_or_404(Member)
+    members_json = serializers.serialize("json", members)
+    return HttpResponse(members_json, content_type="application/json")
 
 def get_trip_members(request, trip_id):
     members = get_list_or_404(Member, trip=trip_id)
