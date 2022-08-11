@@ -45,7 +45,8 @@ def member_post_handler(request, trip_id):
                 "status": "201",
                 "message": f"{user.username} succesfully joined trip {trip_id}",
             },
-            status = 201,
+            
+            status = 201 ,
         )
 
 
