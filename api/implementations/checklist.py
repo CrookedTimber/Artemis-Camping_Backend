@@ -8,8 +8,9 @@ from datetime import datetime
 import json
 
 
-def checklist_get_handler(request, trip_id):
-    checklist = get_list_or_404(Checklist, trip=trip_id)
+def checklist_get_handler(request, trip_id):  
+    
+    checklist = Checklist.objects.filter(trip=trip_id)
     checklist_json = serializers.serialize("json", checklist)
     return HttpResponse(checklist_json, content_type="application/json")
 
@@ -80,10 +81,10 @@ def checklist_put_handler(request, trip_id):
 
                 return JsonResponse(
                     {
-                        "status": "204",
+                        "status": "201",
                         "message": f"Trip checklist successfully updated",
                     },
-                    status=204,
+                    status=201,
                 )
 
             else:
