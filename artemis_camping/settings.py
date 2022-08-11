@@ -91,11 +91,11 @@ WSGI_APPLICATION = "artemis_camping.wsgi.application"
 
 DATABASES = {
     "default": {
+        
         # "ENGINE": "django.db.backends.sqlite3",
         # "NAME": BASE_DIR / "db.sqlite3",
         
         # "DATABASE_URL": "postgres://rguedfavemmmua:06d16fe40c02970b81c1d911ba80e50d46b2d639132a4d939a1ad175331f3f8f@ec2-54-155-110-181.eu-west-1.compute.amazonaws.com:5432/d3f78p0fnoqj91",
-        
         
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": os.environ.get("DATABASE_NAME"),
@@ -103,6 +103,7 @@ DATABASES = {
         "PASSWORD": os.environ.get("DATABASE_PASSWORD"),
         "HOST": os.environ.get("DATABASE_HOST"),
         "PORT": 5432,
+        
     }
 }
 

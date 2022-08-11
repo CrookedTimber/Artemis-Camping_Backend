@@ -42,14 +42,15 @@ def member_post_handler(request, trip_id):
             update_member_user=user,
         )
 
-        new_member.save()
+        new_member.save()       
 
         return JsonResponse(
             {
                 "status": "201",
                 "message": f"{user.username} succesfully joined trip {trip_id}",
             },
-            201,
+            
+            status = 201,
         )
 
 
