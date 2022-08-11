@@ -5,7 +5,6 @@ from api.implementations.bad_request import *
 from api.implementations.budget import *
 from api.implementations.checklist import *
 
-
 from api.implementations.forecast import *
 from api.implementations.home import *
 from api.implementations.itinerary  import *
@@ -17,8 +16,6 @@ from api.implementations.messaging import *
 from api.implementations.settings import *
 from api.implementations.trip import *
 from api.implementations.weather import *
-
-
 
 from django.views.decorators.csrf import csrf_exempt
 
