@@ -23,27 +23,27 @@ def checklist_post_handler(request, trip_id):
     user = UserAccount.objects.get(id=1)
     # user = request.user
 
-    if not Member.objects.filter(trip=trip_id, member=user.pk).exists():
-        return JsonResponse(
-            {
-                "status": "403",
-                "message": f"You are not part of trip {trip_id}",
-            },
-            status=403,
-        )
-    else:
-        trip = Trip.objects.get(id=trip_id)
+    #if not Member.objects.filter(trip=trip_id, member=user.pk).exists():
+    #    return JsonResponse(
+    #        {
+    #            "status": "403",
+    #            "message": f"You are not part of trip {trip_id}",
+    #        },
+    #        status=403,
+    #    )
+    #else:
+    trip = Trip.objects.get(id=trip_id)
 
-        """Change user for request.user"""
-        new_checklist = Checklist(
-            item=data["item"],
-            remark=data["remark"],
-            user_in_charge=user,
-            create_checklist_user=user,
-            update_checklist_user=user,
-            trip=trip,
-        )
-        new_checklist.save()
+    """Change user for request.user"""
+    new_checklist = Checklist(
+        item=data["item"],
+        remark=data["remark"],
+        user_in_charge=user,
+        create_checklist_user=user,
+        update_checklist_user=user,
+        trip=trip,
+    )
+    new_checklist.save()
     return JsonResponse(
         {"status": "201", "message": "Checklist element successfully added to trip"},
         status=201,
