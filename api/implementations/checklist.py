@@ -44,6 +44,7 @@ def checklist_post_handler(request, trip_id):
         trip=trip,
     )
     new_checklist.save()
+
     return JsonResponse(
         {"status": "201", "message": "Checklist element successfully added to trip"},
         status=201,

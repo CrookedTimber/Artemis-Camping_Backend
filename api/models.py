@@ -73,8 +73,9 @@ class Member(models.Model):
 
 class Checklist(models.Model):
     id = models.AutoField(primary_key=True)
-    item = models.TextField(max_length=20)
+    item = models.CharField(max_length=20)
     remark = models.TextField(max_length=1024)
+    name = models.CharField(max_length=20)
     user_in_charge = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, related_name="user_in_charge"
     )
