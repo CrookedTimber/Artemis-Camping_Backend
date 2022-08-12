@@ -23,26 +23,26 @@ def budget_post_handler(request, trip_id):
     user = UserAccount.objects.get(id=1)
     # user = request.user
 
-    if not Member.objects.filter(trip=trip_id, member=user.pk).exists():
-        return JsonResponse(
-            {
-                "status": "403",
+    #if not Member.objects.filter(trip=trip_id, member=user.pk).exists():
+    #    return JsonResponse(
+    #        {
+    #            "status": "403",
                 "message": f"You are not part of trip {trip_id}",
-            },
-            status=403,
-        )
-    else:
-        trip = Trip.objects.get(id=trip_id)
+    #        },
+    #        status=403,
+    #    )
+    #else:
+    trip = Trip.objects.get(id=trip_id)
 
-        new_budget = Budget(
-            item=data["item"],
-            price=data["price"],
-            remark=data["remark"],
-            create_budget_user=user,
-            update_budget_user=user,
-            trip=trip,
-        )
-        new_budget.save()
+    new_budget = Budget(
+        item=data["item"],
+        price=data["price"],
+        remark=data["remark"],
+        create_budget_user=user,
+        update_budget_user=user,
+        trip=trip,
+    )
+    new_budget.save()
     return JsonResponse(
         {"status": "201", "Budget": "Checklist element successfully added to trip"},
         status=201,
